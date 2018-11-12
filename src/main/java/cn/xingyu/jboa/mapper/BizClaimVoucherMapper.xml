@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xingyu.jboa.mapper.BizClaimVoucherMapper" >
+  <resultMap id="BaseResultMap" type="cn.xingyu.jboa.pojo.BizClaimVoucher" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="NEXT_DEAL_SN" property="nextDealSn" jdbcType="VARCHAR" />
+    <result column="CREATE_SN" property="createSn" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="EVENT" property="event" jdbcType="VARCHAR" />
+    <result column="TOTAL_ACCOUNT" property="totalAccount" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NEXT_DEAL_SN, CREATE_SN, CREATE_TIME, EVENT, TOTAL_ACCOUNT, STATUS, MODIFY_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BIZ_CLAIM_VOUCHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from BIZ_CLAIM_VOUCHER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from BIZ_CLAIM_VOUCHER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucherExample" >
+    delete from BIZ_CLAIM_VOUCHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucher" >
+    insert into BIZ_CLAIM_VOUCHER (ID, NEXT_DEAL_SN, CREATE_SN, 
+      CREATE_TIME, EVENT, TOTAL_ACCOUNT, 
+      STATUS, MODIFY_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{nextDealSn,jdbcType=VARCHAR}, #{createSn,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{event,jdbcType=VARCHAR}, #{totalAccount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=VARCHAR}, #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucher" >
+    insert into BIZ_CLAIM_VOUCHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="nextDealSn != null" >
+        NEXT_DEAL_SN,
+      </if>
+      <if test="createSn != null" >
+        CREATE_SN,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="event != null" >
+        EVENT,
+      </if>
+      <if test="totalAccount != null" >
+        TOTAL_ACCOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="nextDealSn != null" >
+        #{nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createSn != null" >
+        #{createSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="event != null" >
+        #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAccount != null" >
+        #{totalAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucherExample" resultType="java.lang.Integer" >
+    select count(*) from BIZ_CLAIM_VOUCHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BIZ_CLAIM_VOUCHER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextDealSn != null" >
+        NEXT_DEAL_SN = #{record.nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createSn != null" >
+        CREATE_SN = #{record.createSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.event != null" >
+        EVENT = #{record.event,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAccount != null" >
+        TOTAL_ACCOUNT = #{record.totalAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        MODIFY_TIME = #{record.modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BIZ_CLAIM_VOUCHER
+    set ID = #{record.id,jdbcType=DECIMAL},
+      NEXT_DEAL_SN = #{record.nextDealSn,jdbcType=VARCHAR},
+      CREATE_SN = #{record.createSn,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      EVENT = #{record.event,jdbcType=VARCHAR},
+      TOTAL_ACCOUNT = #{record.totalAccount,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      MODIFY_TIME = #{record.modifyTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucher" >
+    update BIZ_CLAIM_VOUCHER
+    <set >
+      <if test="nextDealSn != null" >
+        NEXT_DEAL_SN = #{nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createSn != null" >
+        CREATE_SN = #{createSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="event != null" >
+        EVENT = #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAccount != null" >
+        TOTAL_ACCOUNT = #{totalAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xingyu.jboa.pojo.BizClaimVoucher" >
+    update BIZ_CLAIM_VOUCHER
+    set NEXT_DEAL_SN = #{nextDealSn,jdbcType=VARCHAR},
+      CREATE_SN = #{createSn,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      EVENT = #{event,jdbcType=VARCHAR},
+      TOTAL_ACCOUNT = #{totalAccount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=DATE}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

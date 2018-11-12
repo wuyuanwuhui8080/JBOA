@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xingyu.jboa.mapper.BizLeaveMapper" >
+  <resultMap id="BaseResultMap" type="cn.xingyu.jboa.pojo.BizLeave" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="EMPLOYEE_SN" property="employeeSn" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="DATE" />
+    <result column="ENDTIME" property="endtime" jdbcType="DATE" />
+    <result column="LEAVEDAY" property="leaveday" jdbcType="DECIMAL" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="LEAVETYPE" property="leavetype" jdbcType="VARCHAR" />
+    <result column="NEXT_DEAL_SN" property="nextDealSn" jdbcType="VARCHAR" />
+    <result column="APPROVE_OPINION" property="approveOpinion" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="MODIFYTIME" property="modifytime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, EMPLOYEE_SN, STARTTIME, ENDTIME, LEAVEDAY, REASON, STATUS, LEAVETYPE, NEXT_DEAL_SN, 
+    APPROVE_OPINION, CREATETIME, MODIFYTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.xingyu.jboa.pojo.BizLeaveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BIZ_LEAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from BIZ_LEAVE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from BIZ_LEAVE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.xingyu.jboa.pojo.BizLeaveExample" >
+    delete from BIZ_LEAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.xingyu.jboa.pojo.BizLeave" >
+    insert into BIZ_LEAVE (ID, EMPLOYEE_SN, STARTTIME, 
+      ENDTIME, LEAVEDAY, REASON, 
+      STATUS, LEAVETYPE, NEXT_DEAL_SN, 
+      APPROVE_OPINION, CREATETIME, MODIFYTIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{employeeSn,jdbcType=VARCHAR}, #{starttime,jdbcType=DATE}, 
+      #{endtime,jdbcType=DATE}, #{leaveday,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{leavetype,jdbcType=VARCHAR}, #{nextDealSn,jdbcType=VARCHAR}, 
+      #{approveOpinion,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{modifytime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xingyu.jboa.pojo.BizLeave" >
+    insert into BIZ_LEAVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="employeeSn != null" >
+        EMPLOYEE_SN,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="leaveday != null" >
+        LEAVEDAY,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="leavetype != null" >
+        LEAVETYPE,
+      </if>
+      <if test="nextDealSn != null" >
+        NEXT_DEAL_SN,
+      </if>
+      <if test="approveOpinion != null" >
+        APPROVE_OPINION,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="modifytime != null" >
+        MODIFYTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="employeeSn != null" >
+        #{employeeSn,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="leaveday != null" >
+        #{leaveday,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetype != null" >
+        #{leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="nextDealSn != null" >
+        #{nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="approveOpinion != null" >
+        #{approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.xingyu.jboa.pojo.BizLeaveExample" resultType="java.lang.Integer" >
+    select count(*) from BIZ_LEAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BIZ_LEAVE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.employeeSn != null" >
+        EMPLOYEE_SN = #{record.employeeSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=DATE},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=DATE},
+      </if>
+      <if test="record.leaveday != null" >
+        LEAVEDAY = #{record.leaveday,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reason != null" >
+        REASON = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavetype != null" >
+        LEAVETYPE = #{record.leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextDealSn != null" >
+        NEXT_DEAL_SN = #{record.nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveOpinion != null" >
+        APPROVE_OPINION = #{record.approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.modifytime != null" >
+        MODIFYTIME = #{record.modifytime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BIZ_LEAVE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      EMPLOYEE_SN = #{record.employeeSn,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=DATE},
+      ENDTIME = #{record.endtime,jdbcType=DATE},
+      LEAVEDAY = #{record.leaveday,jdbcType=DECIMAL},
+      REASON = #{record.reason,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      LEAVETYPE = #{record.leavetype,jdbcType=VARCHAR},
+      NEXT_DEAL_SN = #{record.nextDealSn,jdbcType=VARCHAR},
+      APPROVE_OPINION = #{record.approveOpinion,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=DATE},
+      MODIFYTIME = #{record.modifytime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xingyu.jboa.pojo.BizLeave" >
+    update BIZ_LEAVE
+    <set >
+      <if test="employeeSn != null" >
+        EMPLOYEE_SN = #{employeeSn,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="leaveday != null" >
+        LEAVEDAY = #{leaveday,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetype != null" >
+        LEAVETYPE = #{leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="nextDealSn != null" >
+        NEXT_DEAL_SN = #{nextDealSn,jdbcType=VARCHAR},
+      </if>
+      <if test="approveOpinion != null" >
+        APPROVE_OPINION = #{approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="modifytime != null" >
+        MODIFYTIME = #{modifytime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xingyu.jboa.pojo.BizLeave" >
+    update BIZ_LEAVE
+    set EMPLOYEE_SN = #{employeeSn,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=DATE},
+      ENDTIME = #{endtime,jdbcType=DATE},
+      LEAVEDAY = #{leaveday,jdbcType=DECIMAL},
+      REASON = #{reason,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      LEAVETYPE = #{leavetype,jdbcType=VARCHAR},
+      NEXT_DEAL_SN = #{nextDealSn,jdbcType=VARCHAR},
+      APPROVE_OPINION = #{approveOpinion,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      MODIFYTIME = #{modifytime,jdbcType=DATE}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
